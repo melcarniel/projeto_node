@@ -7,7 +7,7 @@ const {ensureAuthenticated} = require('../helpers/auth');
 require('../models/Idea');
 const Idea = mongoose.model('ideas');
 
-// Idea Index Page
+// Idea Index Page (lista)
 router.get('/', ensureAuthenticated, (req, res) => {
   Idea.find({user: req.user.id})
     .sort({date:'desc'})
