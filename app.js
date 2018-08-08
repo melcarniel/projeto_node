@@ -17,7 +17,10 @@ const users = require('./routes/users');
 //config. passport
 require('./config/passport')(passport);
 
-global.db = mongoose.connect('mongodb://localhost:27017/vidjot-dev');
+//config db
+const db =require ('./config/database')
+
+global.db = mongoose.connect(db.mongoURI);
 mongoose.connection.on('connected', function () {
     console.log('====CONEXAO ESTABELECIDA====')
 });
@@ -82,6 +85,6 @@ app.get('/about', (req, res) => {
 app.use('/ideas', ideas);
 app.use('/users', users);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Servidor no ar')
 });
